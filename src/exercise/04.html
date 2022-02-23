@@ -6,6 +6,7 @@
   <script src="https://unpkg.com/react@17.0.0/umd/react.development.js"></script>
   <script src="https://unpkg.com/react-dom@17.0.0/umd/react-dom.development.js"></script>
   <script src="https://unpkg.com/@babel/standalone@7.12.4/babel.js"></script>
+  <script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
   <script type="text/babel">
     // 🐨 Make a function called `message` which returns the JSX we want to share
 
@@ -19,14 +20,129 @@
     //   </div>
     // )
 
-    const message = props => props.children
+
+    /**
+     * Exercise
+     */
+    // const message = props => <div className="message">{props.children}</div>
+
+    // const element = (
+    //   <div className="container">
+    //     {message({children: 'Hello World'})}
+    //     {message({children: 'Goodbye World'})}
+    //   </div>
+    // )
+
+
+    /**
+     * Extra 1
+     */
+    // const message = props => <div className="message">{props.children}</div>
+
+    // const element = (
+    //   <div className="container">
+    //     {React.createElement(message, {children: 'Hello World'})}
+    //     {React.createElement(message, {children: 'Goodbye World'})}
+    //   </div>
+    // )
+
+
+    /*
+     * Extra 2
+     */
+    // const Message = ({ children }) => <div className="message" {...{children}} />
+    // const Message = ({ children }) => <div className="message">{children}</div>
+
+    // const element = (
+    //   <div className="container">
+    //     <Message>Hello World</Message>
+    //     <Message>Goodbye World</Message>
+    //   </div>
+    // )
+
+
+    /**
+     * Extra 3
+     */
+    // function Message({subject, greeting}) {
+    //   return (
+    //     <div className="message">
+    //       {greeting}, {subject}
+    //     </div>
+    //   )
+    // }
+
+    // // This implementation is for no prop-types package
+    // const PropTypes = {
+    //   string(props, propName, componentName) {
+    //     if (typeof props[propName] !== 'string') {
+    //       return new Error('This prop needs a string type.')
+    //     }
+    //   },
+    // }
+
+    // Message.propTypes = {
+    //   greeting: PropTypes.string,
+    //   subject: PropTypes.string
+    // }
+
+    // const element = (
+    //   <div className="container">
+    //     <Message greeting="Hello" subject="World" />
+    //     <Message greeting="Goodbye" subject="World" />
+    //   </div>
+    // )
+
+
+    /**
+     * Extra 4
+     */
+    // function Message({subject, greeting}) {
+    //   return (
+    //     <div className="message">
+    //       {greeting}, {subject}
+    //     </div>
+    //   )
+    // }
+
+    // // Without 'isRequired', it will only check type,
+    // // but not care about if the prop is missing.
+    // Message.propTypes = {
+    //   greeting: PropTypes.string.isRequired,
+    //   subject: PropTypes.string.isRequired
+    // }
+
+    // const element = (
+    //   <div className="container">
+    //     <Message greeting={89} />
+    //     <Message greeting="Goodbye" subject="World" />
+    //   </div>
+    // )
+
+
+    /**
+     * Extra 5
+     */
+    function Message({subject, greeting}) {
+      return (
+        <div className="message">
+          {greeting}, {subject}
+        </div>
+      )
+    }
+
+    Message.propTypes = {
+      greeting: PropTypes.string.isRequired,
+      subject: PropTypes.string.isRequired
+    }
 
     const element = (
-      <div className="container">
-        <div className="message">{message({children: 'Hello World'})}</div>
-        <div className="message">{message({children: 'Goodbye World'})}</div>
-      </div>
+      <>
+        <Message greeting="Hello" subject="World" />
+        <Message greeting="Goodbye" subject="World" />
+      </>
     )
+
 
     // 💯 This is only the first step to making actual React components. The rest is in the extra credit!
     ReactDOM.render(element, document.getElementById('root'))
