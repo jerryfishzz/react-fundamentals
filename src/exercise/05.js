@@ -32,65 +32,68 @@ import '../box-styles.css'
 
 
 // Extra 1
-const Box = ({ className, style, ...other }) => (
-  <div 
-    className={`box ${className}`} 
-    style={{
-      fontStyle: 'italic', // Good convention: put the default in front
-      ...style
-    }}
-    {...other} /> // Note, other also includes children
-)
-
-function App() {
-  return (
-    <div>
-      <Box className="box--small" style={{ backgroundColor: 'lightblue' }}>
-        small lightblue box
-      </Box>
-      <Box className='box--medium' style={{ backgroundColor: 'pink' }}>
-        medium pink box
-      </Box>
-      <Box className='box--large' style={{ backgroundColor: 'orange' }}>
-        large orange box
-      </Box>
-    </div>
-  )
-}
-
-
-// Extra 2
-// const Box = ({ size, style, children, ...other }) => {
-//   const className = size === 'small'
-//     ? 'box--small'
-//     : size === 'medium'
-//       ? 'box--medium'
-//       : 'box--large'
-  
-//   return (
-//     <div 
-//       className={className} 
-//       style={style}
-//       {...other}>
-//       {children}
-//     </div>
-//   )
-// }
+// See the tutorial to give a default value to className
+// const Box = ({ className, style, ...other }) => (
+//   <div 
+//     className={`box ${className}`} 
+//     style={{
+//       fontStyle: 'italic', // Good convention: put the default in front
+//       ...style
+//     }}
+//     {...other} /> // Note, other also includes children
+// )
 
 // function App() {
 //   return (
 //     <div>
-//       <Box size="small" style={{ backgroundColor: 'lightblue', fontStyle: 'italic' }}>
+//       <Box className="box--small" style={{ backgroundColor: 'lightblue' }}>
 //         small lightblue box
 //       </Box>
-//       <Box size='medium' style={{ backgroundColor: 'pink', fontStyle: 'italic' }}>
+//       <Box className='box--medium' style={{ backgroundColor: 'pink' }}>
 //         medium pink box
 //       </Box>
-//       <Box size='large' style={{ backgroundColor: 'orange', fontStyle: 'italic' }}>
+//       <Box className='box--large' style={{ backgroundColor: 'orange' }}>
 //         large orange box
 //       </Box>
 //     </div>
 //   )
 // }
+
+
+// Extra 2
+const Box = ({ size, style, ...other }) => {
+  // The tutorial has a better solution to define the size class
+  const className = size === 'small'
+    ? 'box--small'
+    : size === 'medium'
+      ? 'box--medium'
+      : 'box--large'
+  
+  return (
+    <div 
+      className={`box ${className}`} 
+      style={{
+        fontStyle: 'italic',
+        ...style
+      }}
+      {...other} />
+  )
+}
+
+function App() {
+  return (
+    <div>
+      <Box size="small" style={{ backgroundColor: 'lightblue' }}>
+        small lightblue box
+      </Box>
+      <Box size='medium' style={{ backgroundColor: 'pink' }}>
+        medium pink box
+      </Box>
+      <Box size='large' style={{ backgroundColor: 'orange' }}>
+        large orange box
+      </Box>
+    </div>
+  )
+}
 
 export default App
