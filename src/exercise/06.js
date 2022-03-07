@@ -67,7 +67,9 @@ function UsernameForm({onSubmitUsername}) {
  */
 
 
+/* 
 // Extra 2
+// Uncontrolled input
 function UsernameForm({onSubmitUsername}) {
   const inputRef = React.useRef(null)
 
@@ -100,7 +102,40 @@ function UsernameForm({onSubmitUsername}) {
     </form>
   )
 }
+ */
 
+
+// Extra 3
+// Controlled input
+function UsernameForm({onSubmitUsername}) {
+  const inputRef = React.useRef(null)
+
+  const [username, setUsername] = React.useState('')
+
+  const handleChange = e => {
+    setUsername(e.target.value.toLowerCase())
+  }
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    onSubmitUsername(inputRef.current.value)
+  }
+
+  return (
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label htmlFor="usernameInput">Username:</label>
+        <input 
+          type="text" 
+          id="usernameInput" 
+          ref={inputRef} 
+          onChange={handleChange} 
+          value={username} />
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+  )
+}
 
 function App() {
   const onSubmitUsername = username => alert(`You entered: ${username}`)
