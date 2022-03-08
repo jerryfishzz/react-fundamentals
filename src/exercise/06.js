@@ -70,6 +70,8 @@ function UsernameForm({onSubmitUsername}) {
 /* 
 // Extra 2
 // Uncontrolled input
+// In the tutorial, only extra 1 use ref as the submited value.
+// Extra 2 still uses the way in exercise to submit value.
 function UsernameForm({onSubmitUsername}) {
   const inputRef = React.useRef(null)
 
@@ -87,6 +89,9 @@ function UsernameForm({onSubmitUsername}) {
     onSubmitUsername(inputRef.current.value)
   }
 
+
+  // In tutorial, button disabled attribute uses Boolean function
+  // to get a boolean value.
   return (
     <form onSubmit={handleSubmit}>
       <div>
@@ -107,6 +112,8 @@ function UsernameForm({onSubmitUsername}) {
 
 // Extra 3
 // Controlled input
+// In the tutorial, only extra 1 uses ref as the submited value.
+// Extra 3 uses username as the submitted value.
 function UsernameForm({onSubmitUsername}) {
   const inputRef = React.useRef(null)
 
